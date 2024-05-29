@@ -1,3 +1,6 @@
+// Disable for the entire file
+/* eslint-disable @next/next/no-img-element */
+
 import { cn } from '@/lib/utils'
 import React, { HTMLAttributes } from 'react'
 interface PhoneProps extends HTMLAttributes<HTMLDivElement> {
