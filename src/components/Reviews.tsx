@@ -2,7 +2,7 @@
 // Disable for the entire file
 /* eslint-disable @next/next/no-img-element */
 
-import React, { HTMLAttributes, useEffect, useRef, useState } from 'react'
+import React, { HTMLAttributes, HtmlHTMLAttributes, useEffect, useRef, useState } from 'react'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import { useInView } from 'framer-motion'
 import { cn } from '@/lib/utils'
@@ -118,6 +118,8 @@ function ReviewGrid(){
         </>
         : null
         }
+        <div className='pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-100' />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-100" />
     </div>
 }
 
