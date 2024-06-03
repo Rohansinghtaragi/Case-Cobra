@@ -77,7 +77,7 @@ const DesignPreview = ({configuration}: {configuration: configuration}) => {
           }}
         />
     </div>
-
+    
     <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
 
     <div className="mt-20 mb-10 grid grid-cols-1 text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">

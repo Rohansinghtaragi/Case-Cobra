@@ -1,8 +1,46 @@
-import React from 'react'
+'use client'
+import { useQuery } from '@tanstack/react-query'
+import React, { useEffect, useState } from 'react'
+import { getAuthStatus } from './actions'
+import { useRouter } from 'next/navigation'
+import { Loader2 } from 'lucide-react'
 
 const Page = () => {
+
+  const [configId, setConfigId] = useState<string | null>(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    const configurationId = localStorage.getItem('configurationId') 
+
+    if(configurationId) setConfigId(configurationId)
+  }, [])
+
+  const { data } = useQuery({
+    queryKey: ['auth-callback'],
+    queryFn: async () => await getAuthStatus(),
+    retry: true,
+    retryDelay: 500,
+  })
+
+  if(data?.success){
+    if(configId){
+      localStorage.removeItem('configurationId')
+      router.push(`/configure/preview?id=${configId}`)
+    }
+    else{
+      router.push('/')
+    }
+  }
+
   return (
-    <div>page</div>
+    <div className='w-full mt-40 flex justify-center'>
+      <div className="flex flex-col items-center gap-2">
+        <Loader2 className='h-8 w-8 animate-spin text-zinc-500' />
+        <h3 className="font-semibold text-xl">Logging you in...</h3>
+        <p>You will be redirected automatically.</p>
+      </div>
+    </div>
   )
 }
 
