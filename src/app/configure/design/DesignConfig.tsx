@@ -1,15 +1,15 @@
 'use client'
 import HandleComponent from '@/components/HandleComponent'
 import { cn, formatPrice } from '@/lib/utils'
-import { AspectRatio } from '@radix-ui/react-aspect-ratio'
-import { ScrollArea } from '@radix-ui/react-scroll-area'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import NextImage from 'next/image'
 import React, { useRef, useState } from 'react'
 import { Rnd } from 'react-rnd'
 import {Radio, RadioGroup} from '@headlessui/react'
 import { COLORS, FINISHES, MATERIALS, MODELS } from '@/validators/option-validator'
-import { Label } from '@radix-ui/react-label'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
+import { Label } from '@/components/ui/label'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Check, ChevronsUpDown } from 'lucide-react'
 import { BASE_PRICE } from '@/config/products'
@@ -30,7 +30,7 @@ const DesignConfig = ({configId, imageUrl, imageDimension}: DesignConfigProps) =
   const {toast} = useToast()
   const router = useRouter()
 
-  const {mutate: saveConfig} = useMutation({
+  const {mutate: saveConfig, isPending} = useMutation({
     mutationKey: ['save-config'],
     mutationFn: async (args: SaveConfigProps) => {
       await Promise.all([saveConfiguration(), _saveConfig(args)])
@@ -239,7 +239,7 @@ const DesignConfig = ({configId, imageUrl, imageDimension}: DesignConfigProps) =
                   </DropdownMenu>
                 </div>
 
-                {[FINISHES, MATERIALS].map(({type, options: selectableOptions}) => (
+                {[MATERIALS, FINISHES].map(({type, options: selectableOptions}) => (
                   <RadioGroup key={type} value={options[type]} 
                   onChange={(val) => setOptions((prev) => ({...prev, [type]: val}))}>
 
@@ -286,7 +286,7 @@ const DesignConfig = ({configId, imageUrl, imageDimension}: DesignConfigProps) =
                 <p className="font-medium whitespace-nowrap">
                   {formatPrice((BASE_PRICE + options.finish.price + options.material.price)/100)}
                 </p>
-                <Button size='sm' className='w-full' onClick={() => saveConfig({configId, color: options.color.value, finish: options.finish.value, material: options.material.value, model: options.model.value})} >
+                <Button isLoading={isPending} disabled={isPending} loadingText='Saving' size='sm' className='w-full' onClick={() => saveConfig({configId, color: options.color.value, finish: options.finish.value, material: options.material.value, model: options.model.value})} >
                   Continue
                   <ArrowRight className="ml-1.5 h-4 w-4 inline " />
                 </Button>
