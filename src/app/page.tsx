@@ -131,7 +131,7 @@ export default function Home() {
               </div>
               <div className="text-lg leading-8">
               <p>
-                &quot;I usually keep my phone together with my keys in my pocket and that led to some pretty heavy scratchmarks on all of mylast phone cases. This one, besides a barely noticeable scratch on the corner,{' '} <span className='p-0.5 bg-slate-800 text-white'> looks brand new after about half a year</span>. I dig it.&quot;
+                &quot;I usually keep my phone together with my keys in my pocket and that led to some pretty heavy scratch marks on all of my last phone cases. This one, besides a barely noticeable scratch on the corner,{' '} <span className='p-0.5 bg-slate-800 text-white'> looks brand new after about half a year</span>. I dig it.&quot;
                 </p>
               </div>
               <div className="flex gap-4 mt-2">
